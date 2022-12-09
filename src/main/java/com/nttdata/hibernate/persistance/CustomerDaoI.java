@@ -3,7 +3,7 @@ package com.nttdata.hibernate.persistance;
 import java.util.List;
 
 /**
- * Primer Taller - Hibernate
+ * Segundo - Taller - Hibernate
  * 
  * DAO de tabla NTTDATA_CUSTOMER
  * 
@@ -11,42 +11,7 @@ import java.util.List;
  *
  */
 
-public interface CustomerDaoI<C> {
-
-	/**
-	 * Inserta un registro en BBDD.
-	 * 
-	 * @param paramC
-	 */
-	public void insert(C paramC);
-
-	/**
-	 * Actualiza un registro en BBDD.
-	 * 
-	 * @param paramC
-	 */
-	public void update(C paramC);
-
-	/**
-	 * Elimina un registro en BBDD.
-	 * 
-	 * @param paramC
-	 */
-	public void delete(C paramC);
-
-	/**
-	 * Localiza un registro por ID en BBDD.
-	 * 
-	 * @param paramC
-	 */
-	public C searchById(Long id);
-
-	/**
-	 * Búsqueda de todos los registros en BBDD.
-	 * 
-	 * @return List<C>
-	 */
-	public List<C> searchAll();
+public interface CustomerDaoI extends CommonDaoI<Customer> {
 
 	/**
 	 * Búsqueda por nombre y apellidos
@@ -54,8 +19,12 @@ public interface CustomerDaoI<C> {
 	 * @param customerName
 	 * @param customerLastName
 	 * @param customerSecondLastName
-	 * @return
+	 * 
+	 * @return List<Customer>
 	 */
 	public List<Customer> searchByNameAndLastNames(String customerName, String customerLastName,
 			String customerSecondLastName);
+
+	List<Customer> searchByNameAndContractId(String name, Long contractId);
+
 }

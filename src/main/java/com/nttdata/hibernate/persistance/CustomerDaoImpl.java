@@ -2,17 +2,23 @@ package com.nttdata.hibernate.persistance;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 import org.hibernate.Session;
 
 /**
- * Primer Taller - Hibernate
+ * SegundoTaller - Hibernate
  * 
- * DAO de tabla NTTDATA_CUSTOMER
+ * DAO de tabla NTTDATA_CUSTOMER implementación
  * 
  * @author santiagomr
  *
  */
-public class CustomerDaoImpl implements CustomerDaoI<Object> {
+public class CustomerDaoImpl extends CommonDaoImpl<Customer> implements CustomerDaoI {
 
 	/** Sesión conexión a BBDD */
 	private Session session;
@@ -21,64 +27,8 @@ public class CustomerDaoImpl implements CustomerDaoI<Object> {
 	 * Método constructor
 	 */
 	public CustomerDaoImpl(Session session) {
+		super(session);
 		this.session = session;
-	}
-
-	@Override
-	public void insert(Object paramC) {
-		// Verificación de sesión abierta.
-		if (!session.getTransaction().isActive()) {
-			session.getTransaction().begin();
-		}
-
-		// Insercción.
-		session.save(paramC);
-		session.flush();
-
-		// Commit.
-		session.getTransaction().commit();
-
-	}
-
-	@Override
-	public void update(Object paramC) {
-		// Verificación de sesión abierta.
-		if (!session.getTransaction().isActive()) {
-			session.getTransaction().begin();
-		}
-
-		// Insercción.
-		session.saveOrUpdate(paramC);
-
-		// Commit.
-		session.getTransaction().commit();
-
-	}
-
-	@Override
-	public void delete(Object paramC) {
-		// Verificación de sesión abierta.
-		if (!session.getTransaction().isActive()) {
-			session.getTransaction().begin();
-		}
-
-		// Insercción.
-		session.delete(paramC);
-
-		// Commit.
-		session.getTransaction().commit();
-
-	}
-
-	@Override
-	public Object searchById(Long customerID) {
-
-		if (!session.getTransaction().isActive()) {
-			session.getTransaction().begin();
-		}
-
-		// Búsqueda por PK.
-		return session.createQuery("FROM Customer WHERE customerID='" + customerID + "'").getSingleResult();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -91,24 +41,32 @@ public class CustomerDaoImpl implements CustomerDaoI<Object> {
 			session.getTransaction().begin();
 		}
 
-		// Filtra clientes en función del nombre.
-		return session
-				.createQuery("FROM Customer WHERE customerName='" + customerName + "'" + "AND customerLastName='"
-						+ customerLastName + "'" + "AND customerSecondLastName='" + customerSecondLastName + "'")
-				.list();
+		// Filtra clientes en función del nombre completo.
+		return session.createQuery("FROM Customer WHERE customerName='" + customerName + "' AND customerLastName='"
+				+ customerLastName + "' AND customerSecondLastName='" + customerSecondLastName + "'").list();
 
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Object> searchAll() {
-		// Verificación de sesión abierta.
-		if (!session.getTransaction().isActive()) {
-			session.getTransaction().begin();
-		}
+	public List<Customer> searchByNameAndContractId(String name, Long contractID) {
 
-		// Búsqueda de todos los registros.
-		return session.createQuery("FROM Customer").list();
+		// Consultas criteria.
+		final CriteriaBuilder cb = session.getCriteriaBuilder();
+		final CriteriaQuery<Customer> cquery = cb.createQuery(Customer.class);
+		final Root<Customer> root = cquery.from(Customer.class);
+		final Join<Customer, Contract> pJoinT = root.join("contract");
+
+		// Where.
+
+		Predicate pre1 = cb.equal(pJoinT.<Long>get("contractID"), contractID);
+
+		Predicate pre2 = cb.like(root.<String>get("customerName"), name);
+
+		// Consulta.
+		cquery.select(root).where(cb.and(pre1, pre2));
+
+		// Ejecución de consulta.
+		return session.createQuery(cquery).getResultList();
 	}
 
 }

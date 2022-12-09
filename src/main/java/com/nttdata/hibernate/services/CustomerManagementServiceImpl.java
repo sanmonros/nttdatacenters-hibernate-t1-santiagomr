@@ -6,16 +6,27 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Session;
 
+import com.nttdata.hibernate.persistance.Contract;
+import com.nttdata.hibernate.persistance.ContractDaoI;
+import com.nttdata.hibernate.persistance.ContractDaoImpl;
 import com.nttdata.hibernate.persistance.Customer;
 import com.nttdata.hibernate.persistance.CustomerDaoI;
 import com.nttdata.hibernate.persistance.CustomerDaoImpl;
 
+/**
+ * Segundo - Taller - Hibernate
+ * 
+ * Servicio Customer implementación
+ * 
+ * @author santiagomr
+ */
 public class CustomerManagementServiceImpl implements CustomerManagementServiceI {
 
 	/** DAO: NTTDATA_CUSTOMER */
 
-	@SuppressWarnings("rawtypes")
 	private CustomerDaoI customerDao;
+
+	private ContractDaoI contractDao;
 
 	/**
 	 * Método Constructor
@@ -24,9 +35,9 @@ public class CustomerManagementServiceImpl implements CustomerManagementServiceI
 	 */
 	public CustomerManagementServiceImpl(Session session) {
 		this.customerDao = new CustomerDaoImpl(session);
+		this.contractDao = new ContractDaoImpl(session);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void insertNewCustomer(Customer newCustomer) {
 		// Comprobar nulidad e inexistencia
@@ -38,7 +49,6 @@ public class CustomerManagementServiceImpl implements CustomerManagementServiceI
 
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void updateCustomer(Customer updateCustomer) {
 		// Comprobar nulidad e inexistencia
@@ -48,7 +58,6 @@ public class CustomerManagementServiceImpl implements CustomerManagementServiceI
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public void deleteCustomer(Customer deleteCustomer) {
 
@@ -59,9 +68,8 @@ public class CustomerManagementServiceImpl implements CustomerManagementServiceI
 
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Customer> searchByFullName(String customerName, String customerLastName,
+	public List<Customer> searchByNameAndLastNames(String customerName, String customerLastName,
 			String customerSecondLastName) {
 		// Lista resultado
 		List<Customer> customerList = new ArrayList<>();
@@ -74,7 +82,6 @@ public class CustomerManagementServiceImpl implements CustomerManagementServiceI
 		return customerList;
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Customer> searchAll() {
 
@@ -94,10 +101,66 @@ public class CustomerManagementServiceImpl implements CustomerManagementServiceI
 		if (customerID != null) {
 
 			// Obtención del jugador por ID.
-			customer = (Customer) customerDao.searchById(customerID);
+			customer = customerDao.searchById(customerID);
 		}
 
 		return customer;
 	}
+
+	@Override
+	public void insertNewContract(Contract newContract) {
+		// Verificacion de nulidad.
+		if (newContract != null && newContract.getContractID() == null) {
+			// Insercion del nuevo contrato.
+			contractDao.insert(newContract);
+		}
+
+	}
+
+	@Override
+	public void updateContract(Contract updateContract) {
+		// Verificacion de nulidad.
+		if (updateContract != null && updateContract.getContractID() != null) {
+			// Actualizacion del contrato.
+			contractDao.update(updateContract);
+		}
+
+	}
+
+	@Override
+	public void deleteContract(Contract deleteContract) {
+		
+		// Verificacion de nulidad.
+		if (deleteContract != null && deleteContract.getContractID() != null) {
+
+			// Eliminacion del contrato.
+			contractDao.delete(deleteContract);
+		}
+		
+		
+
+	}
+
+	@Override
+	public List<Customer> searchByNameAndContractId(String name, Long contractId) {
+		List<Customer> clientList;
+
+		// Obtención de clientes.
+		clientList = customerDao.searchByNameAndContractId(name, contractId);
+		return clientList;
+	}
+
+	@Override
+	public List<Contract> searchAllContract() {
+		// Resultado.
+		List<Contract> contractList;
+
+		// Obtencion de contratos.
+		contractList = contractDao.searchAll();
+
+		return contractList;
+	}
+
+	
 
 }

@@ -2,18 +2,22 @@ package com.nttdata.hibernate.persistance;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 /**
- * Primer Taller - Hibernate
+ * Segundo Taller - Hibernate
  * 
  * Entidad de la tabla NTTDATA_CUSTOMER
  * 
@@ -22,7 +26,7 @@ import javax.validation.constraints.Min;
  */
 @Entity
 @Table(name = "NTTDATA_CUSTOMER")
-public class Customer implements Serializable {
+public class Customer extends AbstractEntity implements Serializable {
 
 	/** Serial Version */
 	private static final long serialVersionUID = 1L;
@@ -41,6 +45,9 @@ public class Customer implements Serializable {
 
 	/** Documento de identidad */
 	private String customerDni;
+
+	/** Contrato */
+	private Contract contract;
 
 	/**
 	 * 
@@ -66,7 +73,7 @@ public class Customer implements Serializable {
 	 * 
 	 * @return the customerName
 	 */
-	@Column(name = "CUSTOMER_NAME")
+	@Column(name = "CUSTOMER_NAME", nullable = false)
 	public String getCustomerName() {
 		return customerName;
 	}
@@ -83,7 +90,7 @@ public class Customer implements Serializable {
 	 * 
 	 * @return the customerLastName
 	 */
-	@Column(name = "CUSTOMER_LASTNAME")
+	@Column(name = "CUSTOMER_LASTNAME", nullable = false)
 	public String getCustomerLastName() {
 		return customerLastName;
 	}
@@ -100,7 +107,7 @@ public class Customer implements Serializable {
 	 * 
 	 * @return the customerSecondLastName
 	 */
-	@Column(name = "CUSTOMER_SECOND_LAST_NAME")
+	@Column(name = "CUSTOMER_SECOND_LAST_NAME", nullable = false)
 	public String getCustomerSecondLastName() {
 		return customerSecondLastName;
 	}
@@ -121,13 +128,12 @@ public class Customer implements Serializable {
 	@Digits(integer = 9, fraction = 0)
 	@Min(value = 000000001)
 	@Max(value = 999999999)
-
-	/**
-	 * 
-	 * @return the customerDni
-	 */
 	public String getCustomerDni() {
 		return customerDni;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	/**
@@ -139,6 +145,22 @@ public class Customer implements Serializable {
 	}
 
 	/**
+	 * @return the contract
+	 */
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "FK_CONTRACT_ID", referencedColumnName = "CONTRACT_ID")
+	public Contract getContract() {
+		return contract;
+	}
+
+	/**
+	 * @param contract the contract to set
+	 */
+	public void setContract(Contract contract) {
+		this.contract = contract;
+	}
+
+	/**
 	 * Método toString()
 	 */
 	@Override
@@ -146,6 +168,17 @@ public class Customer implements Serializable {
 		return "[customerID = " + customerID + ", customerName = " + customerName + ", customerLastName = "
 				+ customerLastName + ", customerSecondLastName = " + customerSecondLastName + ", customerDni = "
 				+ customerDni + "]";
+	}
+
+	@Transient
+	public Class<?> getClase() {
+		return Customer.class;
+	}
+
+	@Transient
+	@Override
+	public Long getId() {
+		return this.customerID;
 	}
 
 }

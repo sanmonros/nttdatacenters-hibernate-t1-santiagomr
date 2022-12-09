@@ -5,9 +5,9 @@
 
 	<!-- INFORMACIÓN DEL PROYECTO -->
 	<groupId>com.nttdata</groupId>
-	<artifactId>nttdatacenters-hibernate-t1-santiagomr</artifactId>
+	<artifactId>nttdatacenters-hibernate-t2-santiagomr</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>nttdatacenters-hibernate-t1-santiagomr</name>
+	<name>nttdatacenters-hibernate-t2-santiagomr</name>
 	<url>http://www.example.com</url>
 
 	<!-- PROPIEDADES DEL PROYECTO -->
@@ -26,7 +26,6 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.12.0</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>

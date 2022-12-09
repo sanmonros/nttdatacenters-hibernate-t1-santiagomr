@@ -8,8 +8,9 @@
 		<property name="connection.password">root</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
 		<property name="hibernate.show_sql">false</property>
-
+		
 		<!-- MAPEOS -->
 		<mapping class="com.nttdata.hibernate.persistance.Customer" />
+		<mapping class="com.nttdata.hibernate.persistance.Contract" />
 	</session-factory>
 </hibernate-configuration>
