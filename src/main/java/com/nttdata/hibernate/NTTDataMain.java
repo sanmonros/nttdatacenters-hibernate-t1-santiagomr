@@ -37,7 +37,7 @@ public class NTTDataMain {
 		c1.setCustomerName("Paco");
 		c1.setCustomerLastName("Sánchez");
 		c1.setCustomerSecondLastName("Perez");
-		c1.setCustomerDni("765434515");
+		c1.setCustomerDni("765434513");
 		c1.setUpdatedUser(updatedUser);
 		c1.setUpdatedDate(updatedDate);
 
@@ -45,7 +45,7 @@ public class NTTDataMain {
 		c2.setCustomerName("Laura");
 		c2.setCustomerLastName("Rosario");
 		c2.setCustomerSecondLastName("Salguero");
-		c2.setCustomerDni("83454515");
+		c2.setCustomerDni("834545151");
 		c2.setUpdatedUser(updatedUser);
 		c2.setUpdatedDate(updatedDate);
 

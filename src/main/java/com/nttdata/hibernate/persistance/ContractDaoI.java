@@ -1,5 +1,7 @@
 package com.nttdata.hibernate.persistance;
 
+
+
 /**
  * Segundo Taller Hibernate
  * 

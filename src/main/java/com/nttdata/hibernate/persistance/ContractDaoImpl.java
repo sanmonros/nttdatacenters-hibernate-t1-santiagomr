@@ -13,7 +13,6 @@ public class ContractDaoImpl extends CommonDaoImpl<Contract> implements Contract
 
 	public ContractDaoImpl(Session session) {
 		super(session);
-
 	}
 
 }
