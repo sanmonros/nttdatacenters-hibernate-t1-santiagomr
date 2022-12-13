@@ -17,7 +17,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 /**
- * Segundo Taller - Hibernate
+ * Segundo - Taller - Hibernate
  * 
  * Entidad de la tabla NTTDATA_CUSTOMER
  * 
@@ -132,6 +132,10 @@ public class Customer extends AbstractEntity implements Serializable {
 		return customerDni;
 	}
 
+	/**
+	 * 
+	 * @return serialVersionUID
+	 */
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

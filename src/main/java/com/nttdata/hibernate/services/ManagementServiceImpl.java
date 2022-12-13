@@ -20,7 +20,7 @@ import com.nttdata.hibernate.persistance.CustomerDaoImpl;
  * 
  * @author santiagomr
  */
-public class CustomerManagementServiceImpl implements CustomerManagementServiceI {
+public class ManagementServiceImpl implements ManagementServiceI {
 
 	/** DAO: NTTDATA_CUSTOMER */
 
@@ -33,7 +33,7 @@ public class CustomerManagementServiceImpl implements CustomerManagementServiceI
 	 * 
 	 * @param customerDao
 	 */
-	public CustomerManagementServiceImpl(Session session) {
+	public ManagementServiceImpl(Session session) {
 		this.customerDao = new CustomerDaoImpl(session);
 		this.contractDao = new ContractDaoImpl(session);
 	}
@@ -92,6 +92,9 @@ public class CustomerManagementServiceImpl implements CustomerManagementServiceI
 		return customerList;
 	}
 
+	/**
+	 * Obtención del id de cliente
+	 */
 	public Customer searchById(Long customerID) {
 
 		// Resultado.
@@ -129,15 +132,13 @@ public class CustomerManagementServiceImpl implements CustomerManagementServiceI
 
 	@Override
 	public void deleteContract(Contract deleteContract) {
-		
+
 		// Verificacion de nulidad.
 		if (deleteContract != null && deleteContract.getContractID() != null) {
 
 			// Eliminacion del contrato.
 			contractDao.delete(deleteContract);
 		}
-		
-		
 
 	}
 
@@ -160,7 +161,5 @@ public class CustomerManagementServiceImpl implements CustomerManagementServiceI
 
 		return contractList;
 	}
-
-	
 
 }

@@ -7,8 +7,8 @@ import org.hibernate.Session;
 
 import com.nttdata.hibernate.persistance.Contract;
 import com.nttdata.hibernate.persistance.Customer;
-import com.nttdata.hibernate.services.CustomerManagementServiceI;
-import com.nttdata.hibernate.services.CustomerManagementServiceImpl;
+import com.nttdata.hibernate.services.ManagementServiceI;
+import com.nttdata.hibernate.services.ManagementServiceImpl;
 
 /**
  * Segundo - Taller - Hibernate
@@ -26,7 +26,7 @@ public class NTTDataMain {
 		Session session = NTTDataHibernateUtil.getSessionFactory().openSession();
 
 		// Inicialización de servicios.
-		CustomerManagementServiceI contractService = new CustomerManagementServiceImpl(session);
+		ManagementServiceI contractService = new ManagementServiceImpl(session);
 
 		// Auditoria.
 		String updatedUser = "santiagomr";
@@ -69,7 +69,7 @@ public class NTTDataMain {
 		contractService.insertNewContract(co1);
 
 		// Búsqueda de cliente por nombre completo
-		List<Customer> customerFullName = contractService.searchByNameAndLastNames("Paco", "Sanchéz", "Perez");
+		List<Customer> customerFullName = contractService.searchByNameAndLastNames("Paco", "Sánchez", "Perez");
 
 		// Búsqueda de todos los clientres con su correspondiente información
 		List<Customer> customerNames = contractService.searchAll();

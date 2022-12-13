@@ -11,6 +11,11 @@ import org.hibernate.Session;
  */
 public class ContractDaoImpl extends CommonDaoImpl<Contract> implements ContractDaoI {
 
+	/**
+	 * Método constructor
+	 * 
+	 * @param session
+	 */
 	public ContractDaoImpl(Session session) {
 		super(session);
 	}

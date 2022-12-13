@@ -1,9 +1,7 @@
 package com.nttdata.hibernate.persistance;
 
-
-
 /**
- * Segundo Taller Hibernate
+ * Segundo - Taller - Hibernate
  * 
  * DAO Tabla NTTDATA_CONTRACT
  * 

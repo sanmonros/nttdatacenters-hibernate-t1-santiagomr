@@ -8,7 +8,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
 
 /**
- * Segundo Taller - Hibernate
+ * Segundo - Taller - Hibernate
  * 
  * Entidad abstracta
  * 

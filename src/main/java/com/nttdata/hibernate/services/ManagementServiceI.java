@@ -8,11 +8,11 @@ import com.nttdata.hibernate.persistance.Customer;
 /**
  * Segundo - Taller - Hibernate
  * 
- * Servicio Customer
+ * Servicio Customer / Contract
  * 
  * @author santiagomr
  */
-public interface CustomerManagementServiceI {
+public interface ManagementServiceI {
 
 	/**
 	 * Inserta un nuevo cliente.
@@ -35,8 +35,6 @@ public interface CustomerManagementServiceI {
 	 */
 	public void deleteCustomer(Customer deleteCustomer);
 
-	
-
 	/**
 	 * Obtiene todos los clientes existentes.
 	 * 
@@ -51,7 +49,7 @@ public interface CustomerManagementServiceI {
 	 * @return
 	 */
 	public Customer searchById(Long customerID);
-	
+
 	/**
 	 * Inserta un nuevo contrato.
 	 * 
@@ -78,7 +76,7 @@ public interface CustomerManagementServiceI {
 	 * 
 	 * @param contractId
 	 */
-	public List<Customer> searchByNameAndContractId(String name,Long contractId);
+	public List<Customer> searchByNameAndContractId(String name, Long contractId);
 
 	/**
 	 * Obtiene todos los contratos existentes.
@@ -87,6 +85,15 @@ public interface CustomerManagementServiceI {
 	 */
 	public List<Contract> searchAllContract();
 
-	List<Customer> searchByNameAndLastNames(String customerName, String customerLastName, String customerSecondLastName);
+	/**
+	 * Obtiene el nombre del cliente completo
+	 * 
+	 * @param customerName
+	 * @param customerLastName
+	 * @param customerSecondLastName
+	 * @return
+	 */
+	List<Customer> searchByNameAndLastNames(String customerName, String customerLastName,
+			String customerSecondLastName);
 
 }

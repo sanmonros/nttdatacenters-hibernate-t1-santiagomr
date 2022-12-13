@@ -4,7 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 /**
- * Segundo Taller - Hibernate
+ * Segundo - Taller - Hibernate
  * 
  * Clase de configuracion
  * 

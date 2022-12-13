@@ -11,7 +11,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 
 /**
- * SegundoTaller - Hibernate
+ * Segundo - Taller - Hibernate
  * 
  * DAO de tabla NTTDATA_CUSTOMER implementación
  * 

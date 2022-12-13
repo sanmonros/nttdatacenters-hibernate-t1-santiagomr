@@ -3,7 +3,7 @@ package com.nttdata.hibernate.persistance;
 import java.util.List;
 
 /**
- * Segundo Taller Hibernate
+ * Segundo - Taller - Hibernate
  * 
  * Interfaz DAO génerico
  * 
